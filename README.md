@@ -11,7 +11,68 @@ No manual login, cookies, or API keys. The app reads auth from your local Cursor
 | **Menu bar** | Cursor icon + color-coded progress bar (today's spend vs. daily quota) |
 | **Popover** (click the icon) | Today's spend, daily quota, plan details, spend by category, monthly included usage |
 
-The progress bar turns green → yellow → red as you approach your daily quota.
+The progress bar turns **blue → orange → red** as you approach and exceed your daily quota.
+
+## Menu bar states
+
+The icon always shows the Cursor logo plus a compact progress bar. The bar color reflects how much of today's quota you've used.
+
+| State | When it appears | Bar color |
+|-------|-----------------|-----------|
+| **Loading** | App started, fetching usage data | Empty track |
+| **On track** | Below 80% of daily quota | Blue |
+| **Warning** | 80–99% of daily quota | Orange |
+| **Over quota** | At or above 100% of daily quota | Red (full bar) |
+| **Error** | Auth failure or API error | Red indicator |
+
+### Loading
+
+Waiting for the first usage fetch after launch.
+
+![Menu bar — loading](docs/screenshots/menubar-loading-dark.png)
+
+### On track (below 80%)
+
+Plenty of daily quota remaining.
+
+![Menu bar — low usage](docs/screenshots/menubar-low-dark.png)
+
+### Warning (80–99%)
+
+Approaching today's daily quota.
+
+![Menu bar — warning](docs/screenshots/menubar-warning-dark.png)
+
+### Over quota (100% or more)
+
+Today's spend has reached or exceeded the calculated daily quota.
+
+![Menu bar — over quota](docs/screenshots/menubar-over-quota-dark.png)
+
+### Error
+
+Could not load usage — usually means Cursor IDE is not signed in or the session expired.
+
+![Menu bar — error](docs/screenshots/menubar-error-dark.png)
+
+Light-mode variants are in [`docs/screenshots/`](docs/screenshots/) (`*-light.png`).
+
+## Popover details
+
+Click the menu bar icon to open the usage popover:
+
+![Usage popover](docs/screenshots/popover-details.png)
+
+The popover shows:
+
+- **Today** — spend vs. daily quota with percentage and progress bar
+- **Plan** — your Cursor membership type
+- **Billing** — current billing cycle dates
+- **Working days** — count used to calculate the daily quota
+- **By category** — today's spend broken down (when available)
+- **Monthly included** — overall monthly usage vs. limit
+
+*Screenshot uses sample data for illustration.*
 
 ## Requirements
 
@@ -92,6 +153,12 @@ open ".build/Cursor Usage.app"
 ## Menu bar icon
 
 The build script copies `Cursor.icns` from your installed Cursor IDE. The icon is **not** bundled in this repository (trademark/branding). If Cursor is not installed, the menu bar shows the progress bar only.
+
+Regenerate README screenshots after UI changes:
+
+```bash
+./scripts/generate-screenshots.sh
+```
 
 ## Uninstall
 
