@@ -1,0 +1,13 @@
+# Swift build artifacts
+.build/
+.swiftpm/
+*.dSYM/
+
+# macOS
+.DS_Store
+
+# Local config (use config.example.json as template)
+.cursor-usage/
+
+# Icon copied from installed Cursor.app at build time
+Resources/*.icns
